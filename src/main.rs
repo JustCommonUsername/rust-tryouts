@@ -2,6 +2,7 @@ use std::ops::Deref;
 
 mod col;
 mod nested;
+mod geometry;
 
 fn main() {
     println!("Hello, world!");
@@ -78,6 +79,9 @@ fn main() {
     exclusive();
     slices();
     strings();
+
+    // Geometry
+    geometry::main();
 }
 
 fn interproduct(a: i32, b: i32, c: i32) -> i32 {
