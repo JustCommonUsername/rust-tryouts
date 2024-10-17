@@ -1,4 +1,7 @@
+use std::ops::Deref;
+
 mod col;
+mod nested;
 
 fn main() {
     println!("Hello, world!");
@@ -63,6 +66,18 @@ fn main() {
             assert_ne!(prime % i, 0);
         }
     }
+
+    nested::main();
+
+    let a = 'A';
+    let b = 'B';
+    let r: &char = &a;
+    println!("{}", *r);
+    println!("{r}");
+
+    exclusive();
+    slices();
+    strings();
 }
 
 fn interproduct(a: i32, b: i32, c: i32) -> i32 {
@@ -75,4 +90,43 @@ fn fib(n: u32) -> u32 {
     } else {
         fib(n - 1) + fib(n - 2)
     }
+}
+fn print_tuple(tuple: (i32, i32)) {
+    let (left, right) = tuple;
+    println!("left: {left}, right: {right}");
+}
+
+fn exclusive() {
+    let mut point = (1, 2);
+    let x_coord = &mut point.0;
+    *x_coord = 20;
+    println!("point: {point:#?}");
+}
+
+fn slices() {
+    let a: [i32; 6] = [10, 20, 30, 40, 50, 60];
+    println!("a: {a:?}");
+
+    let s: &[i32] = &a[2..=4];
+
+    println!("s: {s:?}");
+}
+
+fn strings() {
+    let s1: &str = "World";
+    println!("s1: {s1}");
+
+    let mut s2: String = String::from("Hello ");
+    println!("s2: {s2}");
+    s2.push_str(s1);
+    println!("s2: {s2}");
+
+    let s3: &str = &s2[s2.len() - s1.len()..];
+    println!("s3: {s3}");
+
+    println!("{:#?}", b"abc");
+    println!("{:#?}", &[97, 98, 99]);
+
+    println!(r#"<a href="link.html">link</a>"#);
+    println!("<a href=\"link.html\">link</a>");
 }
