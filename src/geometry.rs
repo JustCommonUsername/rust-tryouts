@@ -4,7 +4,11 @@
 
 
 fn magnitude(vec: &[f64; 3]) -> f64 {
-    (vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]).sqrt()
+    let mut result: f64 = 0.;
+    for i in 0..3 {
+        result = result + vec[i] * vec[i];
+    }
+    result.sqrt()
 }
 
 // Normalize a vector by calculating its magnitude and dividing all of its

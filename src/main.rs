@@ -3,8 +3,13 @@ use std::ops::Deref;
 mod col;
 mod nested;
 mod geometry;
+mod elevator;
+mod evaluate_expression;
+mod verbosity_filter;
 
 fn main() {
+    elevator::main();
+
     println!("Hello, world!");
     println!("Wow");
 
@@ -82,6 +87,9 @@ fn main() {
 
     // Geometry
     geometry::main();
+
+    structs();
+    point();
 }
 
 fn interproduct(a: i32, b: i32, c: i32) -> i32 {
@@ -134,3 +142,41 @@ fn strings() {
     println!(r#"<a href="link.html">link</a>"#);
     println!("<a href=\"link.html\">link</a>");
 }
+
+struct Person {
+    name: String,
+    age: u8,
+    height: f32,
+}
+
+fn describe(person: &Person) {
+    println!("{} is {} years old and is {} meters long", person.name, person.age, person.height);
+}
+
+fn structs() {
+    let mut peter = Person { name: String::from("Peter"), age: 27, height: 2.10 };
+    describe(&peter);
+
+    peter.age = 28;
+    describe(&peter);
+
+    let name = String::from("Avery");
+    let age = 39;
+    let height = 1.65;
+    let avery = Person { name, age, height };
+    describe(&avery);
+
+    let jackie = Person { name: String::from("Jackie"), ..avery };
+    describe(&jackie);
+}
+
+struct Point(i32, i32);
+
+fn point() {
+    let p = Point(1, 2);
+    println!("({}, {})", p.0, p.1);
+}
+
+struct PoundsOfForce(f64);
+struct Newtons(f64);
+
